@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>La Hoja de Coca</title>
+  <style>
+    :root{
+      --verde-oscuro: #113d2d;
+      --verde-medio: #1e5f4b;
+      --verde-claro: #8ccf9b;
+      --verde-suave: #eaf8ee;
+      --beige: #f7f2e8;
+      --marron: #5a3c2a;
+      --texto: #1f2a24;
+      --blanco: #ffffff;
+      --sombra: rgba(17, 61, 45, 0.15);
+    }
+
+    *{ box-sizing: border-box; }
+
+    html{
+      scroll-behavior: smooth;
+    }
+
+    body{
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: linear-gradient(180deg, #f4f9f4 0%, #edf7ef 100%);
+      color: var(--texto);
+    }
+
+    img{
+      max-width: 100%;
+      display: block;
+    }
+
+    a{
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .container{
+      width: min(1100px, 90%);
+      margin: 0 auto;
+    }
+
+    header{
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(17, 61, 45, 0.95);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+    }
+
+    .nav{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 0;
+      color: var(--blanco);
+    }
+
+    .logo{
+      font-size: 1.4rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+
+    .nav-links{
+      display: flex;
+      gap: 22px;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a{
+      color: #eaf7ee;
+      font-weight: 600;
+      transition: 0.2s ease;
+    }
+
+    .nav-links a:hover{
+      color: var(--verde-claro);
+    }
+
+    .hero{
+      background:
+        linear-gradient(rgba(17,61,45,0.72), rgba(17,61,45,0.72)),
+        url('https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?auto=format&fit=crop&w=1200&q=80') center/cover no-repeat;
+      min-height: 70vh;
+      display: flex;
+      align-items: center;
+      color: var(--blanco);
+      padding: 60px 0;
+    }
+
+    .hero-content{
+      max-width: 700px;
+    }
+
+    .hero-content h1{
+      font-size: clamp(2.6rem, 5vw, 5rem);
+      margin: 0 0 14px;
+      line-height: 1.1;
+    }
+
+    .hero-content p{
+      font-size: 1.15rem;
+      line-height: 1.7;
+      margin-bottom: 28px;
+    }
+
+    .botones{
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .btn{
+      display: inline-block;
+      padding: 14px 24px;
+      border-radius: 999px;
+      font-weight: 700;
+      transition: 0.2s ease;
+    }
+
+    .btn-primary{
+      background: var(--verde-claro);
+      color: var(--verde-oscuro);
+    }
+
+    .btn-secondary{
+      background: transparent;
+      border: 2px solid rgba(255,255,255,0.7);
+      color: var(--blanco);
+    }
+
+    .btn:hover{
+      transform: translateY(-2px);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.12);
+    }
+
+    section{
+      padding: 80px 0;
+    }
+
+    .titulo{
+      font-size: clamp(2rem, 3vw, 2.9rem);
+      color: var(--verde-oscuro);
+      margin-bottom: 18px;
+      text-align: center;
+    }
+
+    .subtitulo{
+      max-width: 760px;
+      margin: 0 auto 40px;
+      text-align: center;
+      color: #3d4d45;
+      line-height: 1.8;
+      font-size: 1.05rem;
+    }
+
+    .grid-3{
+      display: grid;
+      grid-template-columns: repeat(3, minmax(220px, 1fr));
+      gap: 26px;
+    }
+
+    .card{
+      background: var(--blanco);
+      border-radius: 20px;
+      box-shadow: 0 12px 32px var(--sombra);
+      padding: 28px 22px;
+      transition: 0.25s ease;
+    }
+
+    .card:hover{
+      transform: translateY(-6px);
+    }
+
+    .card i{
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: var(--verde-suave);
+      color: var(--verde-oscuro);
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+      font-style: normal;
+      font-weight: 700;
+    }
+
+    .card h3{
+      margin: 0 0 12px;
+      font-size: 1.35rem;
+      color: var(--verde-oscuro);
+    }
+
+    .card p{
+      margin: 0;
+      line-height: 1.7;
+      color: #40514a;
+    }
+
+    .historia{
+      background: linear-gradient(180deg, #f1f8f3 0%, #edf8ef 100%);
+    }
+
+    .historia-box{
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .historia-box .texto{
+      line-height: 1.9;
+      color: #2d3d35;
+      font-size: 1.02rem;
+    }
+
+    .foto{
+      min-height: 320px;
+      border-radius: 24px;
+      background:
+        linear-gradient(rgba(17,61,45,0.28), rgba(17,61,45,0.18)),
+        url('https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&fit=crop&w=900&q=80') center/cover no-repeat;
+      box-shadow: 0 18px 32px rgba(17,61,45,0.12);
+    }
+
+    .beneficios{
+      display: grid;
+      grid-template-columns: repeat(2, minmax(250px, 1fr));
+      gap: 22px;
+      margin-top: 30px;
+    }
+
+    .beneficio{
+      background: var(--beige);
+      border-left: 6px solid var(--verde-medio);
+      border-radius: 16px;
+      padding: 20px 18px;
+      line-height: 1.8;
+      color: #2d3d35;
+    }
+
+    .curiosidades{
+      background: var(--verde-oscuro);
+      color: var(--blanco);
+    }
+
+    .curiosidades .titulo{
+      color: var(--blanco);
+    }
+
+    .curiosidades .subtitulo{
+      color: #dfeee3;
+    }
+
+    .stats{
+      display: grid;
+      grid-template-columns: repeat(4, minmax(180px, 1fr));
+      gap: 18px;
+      margin-top: 30px;
+    }
+
+    .stat{
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 18px;
+      padding: 28px 16px;
+      text-align: center;
+    }
+
+    .stat strong{
+      display: block;
+      font-size: 2rem;
+      margin-bottom: 10px;
+      color: var(--verde-claro);
+    }
+
+    .stat span{
+      font-size: 0.98rem;
+      color: #ebf7ee;
+    }
+
+    .lista{
+      display: grid;
+      grid-template-columns: repeat(2, minmax(250px, 1fr));
+      gap: 16px;
+      margin-top: 30px;
+    }
+
+    .lista-item{
+      background: var(--blanco);
+      border-radius: 14px;
+      padding: 18px 20px;
+      box-shadow: 0 10px 22px rgba(17,61,45,0.08);
+      line-height: 1.7;
+      color: var(--texto);
+    }
+
+    .lista-item strong{
+      color: var(--verde-oscuro);
+    }
+
+    .cta{
+      background: linear-gradient(135deg, var(--verde-medio), var(--verde-oscuro));
+      color: var(--blanco);
+      text-align: center;
+      padding: 64px 0;
+    }
+
+    .cta h2{
+      margin: 0 0 14px;
+      font-size: clamp(2rem, 4vw, 3rem);
+    }
+
+    .cta p{
+      margin: 0 auto 24px;
+      max-width: 760px;
+      line-height: 1.8;
+      color: #e7f8eb;
+    }
+
+    footer{
+      background: #0d2d24;
+      color: #dfeee3;
+      padding: 24px 0;
+      text-align: center;
+    }
+
+    @media (max-width: 840px){
+      .grid-3,
+      .beneficios,
+      .stats,
+      .lista,
+      .historia-box,
+      .medicinas-grid,
+      .productos-grid{
+        grid-template-columns: 1fr;
+      }
+
+      .nav{
+        flex-direction: column;
+        gap: 14px;
+      }
+
+      .nav-links{
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="container nav">
+      <div class="logo">🌿 Hoja de Coca</div>
+      <nav class="nav-links">
+        <a href="#inicio">Inicio</a>
+        <a href="#historia">Historia</a>
+        <a href="#usos">Usos</a>
+        <a href="#beneficios">Beneficios</a>
+        <a href="#curiosidades">Curiosidades</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio">
+      <div class="container hero-content">
+        <h1>La hoja de coca</h1>
+        <p>
+          Una planta con profunda presencia cultural, medicinal y tradicional en los Andes,
+          reconocida por su valor histórico y por la riqueza de su significado para muchas
+          comunidades.
+        </p>
+        <div class="botones">
+          <a class="btn btn-primary" href="#historia">Descubre más</a>
+          <a class="btn btn-secondary" href="#curiosidades">Curiosidades</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="historia">
+      <div class="container">
+        <h2 class="titulo">Historia y origen</h2>
+        <p class="subtitulo">
+          La hoja de coca ha sido parte de la vida de los pueblos andinos durante siglos,
+          donde se considera un símbolo de identidad, tradición y conexión con la tierra.
+        </p>
+
+        <div class="historia-box">
+          <div class="texto">
+            <p>
+              Originaria de la región andina de Sudamérica, la hoja de coca se ha cultivado
+              desde tiempos ancestrales por culturas como los pueblos que habitaron los Andes.
+              Su uso tradicional se ha asociado a rituales, intercambio social, trabajo físico
+              y prácticas de salud natural.
+            </p>
+            <p>
+              En muchas comunidades, la hoja se masticaba o se preparaba en infusiones,
+              especialmente como parte de costumbres culturales profundamente arraigadas.
+              Aunque hoy la hoja es conocida por su controversia, también merece ser
+              entendida dentro de su contexto histórico y cultural.
+            </p>
+          </div>
+          <div class="foto" aria-label="Imagen representativa de la hoja de coca"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="usos">
+      <div class="container">
+        <h2 class="titulo">Usos tradicionales</h2>
+        <p class="subtitulo">
+          La hoja de coca ha tenido múltiples usos dentro de prácticas culturales y de bienestar,
+          destacándose por su conexión con la vida cotidiana en la región andina.
+        </p>
+
+        <div class="grid-3">
+          <div class="card">
+            <i>🌱</i>
+            <h3>Cultural</h3>
+            <p>Ha sido un elemento central en ceremonias, rituales y celebraciones de diversas comunidades andinas.</p>
+          </div>
+
+          <div class="card">
+            <i>🧑‍🌾</i>
+            <h3>Laboral</h3>
+            <p>El consumo tradicional de la hoja se asocia con largas jornadas de trabajo y resistencia física en algunos contextos.</p>
+          </div>
+
+          <div class="card">
+            <i>🍵</i>
+            <h3>Infusión</h3>
+            <p>Se prepara en infusiones y mezclas tradicionales para acompañar ciertas costumbres relacionadas con la salud o la alimentación.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="beneficios" class="historia">
+      <div class="container">
+        <h2 class="titulo">Beneficios asociados al contexto tradicional</h2>
+        <p class="subtitulo">
+          Es importante entender el uso tradicional de la hoja de coca sin reducirlo a una sola interpretación.
+          Para muchas personas, representa un elemento de identidad y bienestar cultural.
+        </p>
+
+        <div class="beneficios">
+          <div class="beneficio">
+            <strong>1.</strong> Conexión con la tradición andina y la memoria cultural de comunidades ancestrales.
+          </div>
+          <div class="beneficio">
+            <strong>2.</strong> Relación con procesos sociales y comunitarios de gran valor simbólico.
+          </div>
+          <div class="beneficio">
+            <strong>3.</strong> Integración en prácticas de preparación y consumo con raíces históricas en la región.
+          </div>
+          <div class="beneficio">
+            <strong>4.</strong> Importancia como parte del patrimonio natural y cultural de Sudamérica.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="curiosidades" class="curiosidades">
+      <div class="container">
+        <h2 class="titulo">Curiosidades</h2>
+        <p class="subtitulo">
+          Aunque la hoja de coca es conocida internacionalmente por su controversia, también tiene un valor cultural y botánico muy significativo.
+        </p>
+
+        <div class="stats">
+          <div class="stat">
+            <strong> siglos </strong>
+            <span>de presencia histórica en los Andes</span>
+          </div>
+          <div class="stat">
+            <strong>Andes</strong>
+            <span>zona de origen</span>
+          </div>
+          <div class="stat">
+            <strong>1</strong>
+            <span>planta con gran significado cultural</span>
+          </div>
+          <div class="stat">
+            <strong>∞</strong>
+            <span>relación con tradiciones regionales</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <h2 class="titulo">Información relevante</h2>
+
+        <div class="lista">
+          <div class="lista-item">
+            <strong>Nombre científico:</strong> Erythroxylum coca.
+          </div>
+          <div class="lista-item">
+            <strong>Región:</strong> Principalmente en América del Sur, especialmente los Andes.
+          </div>
+          <div class="lista-item">
+            <strong>Uso tradicional:</strong> Presente en prácticas culturales y de preparación de comidas o infusiones.
+          </div>
+          <div class="lista-item">
+            <strong>Importancia cultural:</strong> Forma parte del patrimonio natural y simbólico del pueblo andino.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta">
+      <div class="container">
+        <h2>La hoja de coca, un símbolo de identidad</h2>
+        <p>
+          Más allá de su fama mundial, esta planta guarda un valor profundo para muchas
+          comunidades, representando una mezcla de historia, cultura y relación con la tierra.
+        </p>
+        <a href="#inicio" class="btn btn-primary">Volver arriba</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    Proyecto educativo sobre la hoja de coca • 2026
+  </footer>
+
+</body>
+</html>
